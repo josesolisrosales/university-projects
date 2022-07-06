@@ -72,7 +72,7 @@ public class CRUnion extends javax.swing.JFrame {
 
         transaccionReciente.setEditable(false);
         transaccionReciente.setBackground(new java.awt.Color(225, 225, 225));
-        transaccionReciente.setColumns(80);
+        transaccionReciente.setColumns(20);
         transaccionReciente.setRows(5);
         jScrollPane2.setViewportView(transaccionReciente);
 
