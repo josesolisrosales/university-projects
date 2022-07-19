@@ -1,0 +1,11 @@
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\bin\Debug\rentaUned.exe.config
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\bin\Debug\rentaUned.exe
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\bin\Debug\rentaUned.pdb
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.csproj.AssemblyReference.cache
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.csproj.SuggestedBindingRedirects.cache
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.rentaUNED.resources
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.Properties.Resources.resources
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.csproj.GenerateResource.cache
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.csproj.CoreCompileInputs.cache
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.exe
+C:\Users\joses\Documents\GitHub\university-projects\rentaUned\obj\Debug\rentaUned.pdb
