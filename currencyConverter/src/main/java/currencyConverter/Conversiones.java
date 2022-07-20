@@ -1,7 +1,7 @@
 package currencyConverter;
 
 //Clase para realizar las conversiones
-public class conversion {
+public class Conversiones {
 
     //Este metodo recibe la cantidad inicial, la moneda de origen y la moneda de destino y retorna el valor final que el banco debe entregar al cliente
     public static float ConversionMonedas(float cantidadMonedaInicial, String monedaOrigen, String monedaDestino) {
@@ -19,7 +19,7 @@ public class conversion {
         } else {
             // Escenario Venta, cuando la moneda origen es diferente del dolar primero se calcula el intermediario en dolares y luego se usa el metodo compraDolar para convertir de dolares a moneda destino
             conversionIntermediaDolar = VentaDolar(cantidadMonedaInicial, monedaOrigen);
-            cantidadMonedaInicial = CompraDolar(conversionIntermediaDolar, monedaDestino);
+            cantidadMonedaFinal = CompraDolar(conversionIntermediaDolar, monedaDestino);
             return cantidadMonedaFinal;
 
         }
@@ -27,14 +27,14 @@ public class conversion {
     
     // Este metodo es usado cuando el cliente quiere convertir de dolares a otra moneda, calcula el precio de compra y devuelve la cantidad en dolares
     private static float CompraDolar(float montoDolar, String monedaDestino) {
-        precioCompraDolar = Equivalencias.precioCompra(monedaDestino);
+        precioCompraDolar = Equivalencias.getInstance().precioCompra(monedaDestino);
         cantidadMonedaFinal = precioCompraDolar * montoDolar;
         return cantidadMonedaFinal;
     }
 
     // Este metodo es usado cuando el cliente quiere convertir una moneda diferente del dolar. calcula la conversion intermedia monedaOrigen -> Dolar
     private static float VentaDolar(float montoMoneda, String monedaOrigen) {
-        precioVentaDolar = Equivalencias.precioVenta(monedaOrigen);
+        precioVentaDolar = Equivalencias.getInstance().precioCompra(monedaOrigen);
         conversionIntermediaDolar = montoMoneda / precioVentaDolar;
         return conversionIntermediaDolar;
     }

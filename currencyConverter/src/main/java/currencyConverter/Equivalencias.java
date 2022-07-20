@@ -2,14 +2,29 @@ package currencyConverter;
 
 import java.util.Arrays;
 
-// Clase con los constructores
-class constructorClass{
+// Clase equivalencias, computa los precios de compra y venta de la moneda seleccionada
 
-    //Overload de constructor constructorClass
-    public constructorClass(int numeroMonedas) {
+public class Equivalencias{
 
+    private static Equivalencias equivalencias;
+
+    public static Equivalencias getInstance()
+    {
+        if (equivalencias==null)
+            equivalencias = new Equivalencias();
+        return equivalencias;
+    }
+
+    public static Equivalencias getInstance(int numeroMonedas)
+    {
+        if (equivalencias==null)
+            equivalencias = new Equivalencias(numeroMonedas);
+        return equivalencias;
+    }
+
+    public Equivalencias(int numeroMonedas) {
         if (numeroMonedas >= 5 && numeroMonedas <= 25) {
-            defaultDescripcionMonedas = new String[]{
+            String[] defaultDescripcionMonedas = new String[]{
                 "dolar estadounidense",
                 "euros",
                 "colones",
@@ -20,7 +35,7 @@ class constructorClass{
                 "yen"
                 };
 
-            defaultValorMonedas = new float[][]{
+            float[][] defaultValorMonedas = new float[][]{
                 {1, 1},
                 {0.85f, 0.91f},
                 {660, 670},
@@ -55,10 +70,9 @@ class constructorClass{
             } else {
                 java.util.logging.Logger.getLogger(Equivalencias.class.getName()).log(java.util.logging.Level.SEVERE, "Initial array length must be between 5 and 25");
             }
-        }
+    }
 
-
-    public constructorClass() {
+    public Equivalencias() {
 
         descripcionMonedas = new String[]{
             "dolar estadounidense",
@@ -83,48 +97,15 @@ class constructorClass{
         };
     }
 
-    // Funciones setter y getter para trabajar con variables privadas fuera de la clase
-    public void setValorMonedas(float[][] valorMonedas) {
-        this.valorMonedas = valorMonedas;
-    }
-
-    public void setDescripcionMonedas(String[] descripcionMonedas) {
-        this.descripcionMonedas = descripcionMonedas;
-    }
-
-    public float[][] getValorMonedas() {
-        return this.valorMonedas;
-    }
-
-    public String[] getDescripcionMonedas() {
-        return this.descripcionMonedas;
-    }
-
-    // Definicion de variables privadas
-    private String[] descripcionMonedas;
-    private float[][] valorMonedas;
-    private String[] defaultDescripcionMonedas;
-    private float[][] defaultValorMonedas;
-
-}
-
-
-// Clase equivalencias, computa los precios de compra y venta de la moneda seleccionada
-public class Equivalencias{
-
-    private static int posicionMoneda(String monedaOrigen) {
-        constructorClass equivalencias = new constructorClass();
-        String[] descripcionMonedas = equivalencias.getDescripcionMonedas();
+    private int posicionMoneda(String monedaOrigen) {
         int index = Arrays.asList(descripcionMonedas).indexOf(monedaOrigen.toLowerCase());
 
         return index;
 
     }
 
-    public static float precioCompra(String monedaOrigen) {
+    public float precioCompra(String monedaOrigen) {
 
-        constructorClass equivalencias = new constructorClass();
-        float[][] valorMonedas = equivalencias.getValorMonedas();
         float precioCompra;
         int indiceMoneda = posicionMoneda(monedaOrigen);
 
@@ -133,10 +114,8 @@ public class Equivalencias{
         return precioCompra;
     }
 
-    public static float precioVenta(String monedaOrigen) {
+    public float precioVenta(String monedaOrigen) {
 
-        constructorClass equivalencias = new constructorClass();
-        float[][] valorMonedas = equivalencias.getValorMonedas();
         float precioVenta;
         int indiceMoneda = posicionMoneda(monedaOrigen);
 
@@ -144,5 +123,54 @@ public class Equivalencias{
 
         return precioVenta;
     }
+
+    public boolean validarExistenciaMoneda(String nombre) {
+        for (String descripcionMoneda : this.descripcionMonedas) {
+            if (descripcionMoneda.equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void agregarMoneda(String nombre, float precioCompra, float precioVenta) {
+        for (int i = 0; i < this.descripcionMonedas.length; i++) {
+            if (this.descripcionMonedas[i].equals("")) {
+                this.descripcionMonedas[i] = nombre;
+                this.valorMonedas[i][0] = precioCompra;
+                this.valorMonedas[i][1] = precioVenta;
+                break;
+            }
+        }
+    }
+
+    public void actualizarMoneda(String nombre, float precioCompra, float precioVenta) {
+        int index = Arrays.asList(this.descripcionMonedas).indexOf(nombre.toLowerCase());
+        this.valorMonedas[index][0] = precioCompra;
+        this.valorMonedas[index][1] = precioVenta;
+    }
+
+    public String[] getDescripcionesMonedasValidas() {
+        int cantidadMonedasValidas = 0;
+        for (String descripcionMoneda : this.descripcionMonedas) {
+            if (!descripcionMoneda.equals("")) {
+                cantidadMonedasValidas++;
+            }
+        }
+        
+        String[] labelsMonedasUI = new String[cantidadMonedasValidas];
+
+        for (int i = 0; i < this.descripcionMonedas.length; i++) {
+            if (!this.descripcionMonedas[i].equals("")) {
+                labelsMonedasUI[i] = this.descripcionMonedas[i];
+            }
+        }
+
+        return labelsMonedasUI;
+    }
+
+    // Definicion de variables privadas
+    private String[] descripcionMonedas;
+    private float[][] valorMonedas;
 
 }
